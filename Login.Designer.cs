@@ -29,13 +29,12 @@
         private void InitializeComponent()
         {
             lblLogin = new Label();
-            textBox1 = new TextBox();
-            lblUserEmail = new Label();
-            lblPassword = new Label();
+            txtUsernameEmail = new TextBox();
             txtPassword = new TextBox();
             btnLogin = new Button();
             btnRegister = new Button();
             button1 = new Button();
+            errLogin = new Label();
             SuspendLayout();
             // 
             // lblLogin
@@ -49,44 +48,29 @@
             lblLogin.Text = "Login";
             lblLogin.TextAlign = ContentAlignment.MiddleCenter;
             // 
-            // textBox1
+            // txtUsernameEmail
             // 
-            textBox1.BackColor = SystemColors.InactiveCaption;
-            textBox1.BorderStyle = BorderStyle.FixedSingle;
-            textBox1.Location = new Point(187, 168);
-            textBox1.Name = "textBox1";
-            textBox1.Size = new Size(404, 23);
-            textBox1.TabIndex = 1;
-            textBox1.TextAlign = HorizontalAlignment.Center;
-            // 
-            // lblUserEmail
-            // 
-            lblUserEmail.AutoSize = true;
-            lblUserEmail.Font = new Font("MV Boli", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblUserEmail.Location = new Point(331, 144);
-            lblUserEmail.Name = "lblUserEmail";
-            lblUserEmail.Size = new Size(130, 21);
-            lblUserEmail.TabIndex = 2;
-            lblUserEmail.Text = "Username/Email";
-            // 
-            // lblPassword
-            // 
-            lblPassword.AutoSize = true;
-            lblPassword.Font = new Font("MV Boli", 12F, FontStyle.Regular, GraphicsUnit.Point);
-            lblPassword.Location = new Point(355, 194);
-            lblPassword.Name = "lblPassword";
-            lblPassword.Size = new Size(79, 21);
-            lblPassword.TabIndex = 3;
-            lblPassword.Text = "Password";
+            txtUsernameEmail.BackColor = SystemColors.InactiveCaption;
+            txtUsernameEmail.BorderStyle = BorderStyle.FixedSingle;
+            txtUsernameEmail.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtUsernameEmail.Location = new Point(187, 152);
+            txtUsernameEmail.Name = "txtUsernameEmail";
+            txtUsernameEmail.PlaceholderText = "Username/Email";
+            txtUsernameEmail.Size = new Size(404, 27);
+            txtUsernameEmail.TabIndex = 1;
+            txtUsernameEmail.TextAlign = HorizontalAlignment.Center;
             // 
             // txtPassword
             // 
             txtPassword.BackColor = SystemColors.InactiveCaption;
             txtPassword.BorderStyle = BorderStyle.FixedSingle;
-            txtPassword.Location = new Point(187, 218);
+            txtPassword.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            txtPassword.Location = new Point(187, 202);
             txtPassword.Name = "txtPassword";
-            txtPassword.Size = new Size(404, 23);
+            txtPassword.PlaceholderText = "Password";
+            txtPassword.Size = new Size(404, 27);
             txtPassword.TabIndex = 4;
+            txtPassword.TextAlign = HorizontalAlignment.Center;
             // 
             // btnLogin
             // 
@@ -102,6 +86,7 @@
             btnLogin.TabIndex = 5;
             btnLogin.Text = "Login";
             btnLogin.UseVisualStyleBackColor = false;
+            btnLogin.Click += btnLogin_Click;
             // 
             // btnRegister
             // 
@@ -130,19 +115,30 @@
             button1.Text = "Forgot";
             button1.UseVisualStyleBackColor = false;
             // 
+            // errLogin
+            // 
+            errLogin.AutoSize = true;
+            errLogin.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            errLogin.ForeColor = Color.Red;
+            errLogin.Location = new Point(305, 132);
+            errLogin.Name = "errLogin";
+            errLogin.Size = new Size(165, 17);
+            errLogin.TabIndex = 8;
+            errLogin.Text = "Your credentials are wrong!\r\n";
+            errLogin.Visible = false;
+            // 
             // Login
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(errLogin);
             Controls.Add(button1);
             Controls.Add(btnRegister);
             Controls.Add(btnLogin);
             Controls.Add(txtPassword);
-            Controls.Add(lblPassword);
-            Controls.Add(lblUserEmail);
-            Controls.Add(textBox1);
+            Controls.Add(txtUsernameEmail);
             Controls.Add(lblLogin);
             Name = "Login";
             Text = "Form1";
@@ -153,12 +149,11 @@
         #endregion
 
         private Label lblLogin;
-        private TextBox textBox1;
-        private Label lblUserEmail;
-        private Label lblPassword;
+        private TextBox txtUsernameEmail;
         private TextBox txtPassword;
         private Button btnLogin;
         private Button btnRegister;
         private Button button1;
+        private Label errLogin;
     }
 }

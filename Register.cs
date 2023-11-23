@@ -56,18 +56,47 @@ namespace Mini_Proj
                 reg.Fname = txtFName.Text;
                 reg.Sname = txtSName.Text;
                 reg.Password = txtPassword.Text.GetHashCode();
-                this.Hide();
-                using (Login login = new())
+                byte[] asciiBytes = Encoding.ASCII.GetBytes(txtPassword.Text);
+                int count = 0;
+                for (int i = 0; i < txtPassword.Text.Length; i++)
                 {
-                    login.ShowDialog();
+                    if ((33 <= asciiBytes[i] && asciiBytes[i] <= 47) || (58 <= asciiBytes[i] && asciiBytes[i] <= 64))
+                    {
+                        count++;
+                    }
+                    
                 }
-                this.Close();
+
+                if (txtUsername.Text == "" || txtEmail.Text == "" || txtFName.Text == "" || txtSName.Text == "" || txtPassword.Text == "")
+                {
+                    err2.Visible = true;
+                }
+                else
+                {
+                    if (count > 0)
+                    {
+
+                        this.Hide();
+                        using (Login login = new())
+                        {
+                            login.ShowDialog();
+                        }
+                        this.Close();
+                    }
+                    else
+                    {
+                        err.Visible = true;
+                    }
+                }
+
             }
             else
             {
-                errPasswordMatch.Dispose();
+                err.Visible = true;
             }
         }
+
+        
 
         private void CreateValidation()
         {

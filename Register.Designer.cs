@@ -43,6 +43,8 @@
             errEmail = new ErrorProvider(components);
             errPassword = new ErrorProvider(components);
             errPasswordMatch = new ErrorProvider(components);
+            err = new Label();
+            err2 = new Label();
             ((System.ComponentModel.ISupportInitialize)errUsername).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errEmail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errPassword).BeginInit();
@@ -64,6 +66,7 @@
             // 
             txtUsername.ForeColor = SystemColors.Desktop;
             txtUsername.Location = new Point(269, 140);
+            txtUsername.MaxLength = 36;
             txtUsername.Name = "txtUsername";
             txtUsername.PlaceholderText = "Username";
             txtUsername.Size = new Size(236, 23);
@@ -100,21 +103,26 @@
             // 
             txtPassword.ForeColor = SystemColors.Desktop;
             txtPassword.Location = new Point(269, 256);
+            txtPassword.MaxLength = 36;
             txtPassword.Name = "txtPassword";
             txtPassword.PasswordChar = '*';
             txtPassword.PlaceholderText = "Password";
+            txtPassword.ShortcutsEnabled = false;
             txtPassword.Size = new Size(236, 23);
             txtPassword.TabIndex = 5;
+            txtPassword.UseSystemPasswordChar = true;
             // 
             // txtConfirmPassword
             // 
             txtConfirmPassword.ForeColor = SystemColors.Desktop;
             txtConfirmPassword.Location = new Point(269, 285);
+            txtConfirmPassword.MaxLength = 36;
             txtConfirmPassword.Name = "txtConfirmPassword";
             txtConfirmPassword.PasswordChar = '*';
             txtConfirmPassword.PlaceholderText = "Confirm Password";
             txtConfirmPassword.Size = new Size(236, 23);
             txtConfirmPassword.TabIndex = 6;
+            txtConfirmPassword.UseSystemPasswordChar = true;
             // 
             // btnPasswordView
             // 
@@ -168,12 +176,39 @@
             // 
             errPasswordMatch.ContainerControl = this;
             // 
+            // err
+            // 
+            err.AutoSize = true;
+            err.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            err.ForeColor = Color.Red;
+            err.Location = new Point(157, 365);
+            err.Name = "err";
+            err.Size = new Size(454, 17);
+            err.TabIndex = 10;
+            err.Text = "Password needs to Contain atleast one special character and needs to match!";
+            err.TextAlign = ContentAlignment.MiddleCenter;
+            err.Visible = false;
+            // 
+            // err2
+            // 
+            err2.AutoSize = true;
+            err2.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            err2.ForeColor = Color.Red;
+            err2.Location = new Point(340, 119);
+            err2.Name = "err2";
+            err2.Size = new Size(89, 17);
+            err2.TabIndex = 11;
+            err2.Text = "Missing Fields!";
+            err2.Visible = false;
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(err2);
+            Controls.Add(err);
             Controls.Add(btnCreate);
             Controls.Add(btnConfirmPasswordView);
             Controls.Add(btnPasswordView);
@@ -210,5 +245,7 @@
         private ErrorProvider errEmail;
         private ErrorProvider errPassword;
         private ErrorProvider errPasswordMatch;
+        private Label err;
+        private Label err2;
     }
 }
