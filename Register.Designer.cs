@@ -194,7 +194,7 @@
             err2.AutoSize = true;
             err2.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
             err2.ForeColor = Color.Red;
-            err2.Location = new Point(340, 119);
+            err2.Location = new Point(341, 119);
             err2.Name = "err2";
             err2.Size = new Size(89, 17);
             err2.TabIndex = 11;

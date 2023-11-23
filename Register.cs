@@ -1,4 +1,5 @@
-﻿using System;
+﻿using Npgsql;
+using System;
 using System.Collections.Generic;
 using System.ComponentModel;
 using System.Data;
@@ -45,7 +46,7 @@ namespace Mini_Proj
             public string Sname = "";
             public int Password;
         }
-
+        public static string cs = "Host=ragged-mummy-11407.8nj.cockroachlabs.cloud;Port=26257;Database=HomeWorkBud;Username=aq232596_aquinas_ac_;Password=72eg0Wd7zpeV1TLCwAqr2A;SSL Mode=Prefer;Trust Server Certificate=true";
         private void btnCreate_Click(object sender, EventArgs e)
         {
             if (txtPassword.Text == txtConfirmPassword.Text)
@@ -75,7 +76,22 @@ namespace Mini_Proj
                 {
                     if (count > 0)
                     {
+                        using (var conn = new NpgsqlConnection(cs))
+                        {
+                            conn.Open();
+                            using (var cmd = new NpgsqlCommand("INSERT INTO Users(id,Username,Email,Fname,Sname,Password) VALUES(id,@value1,@value2,@value3,@value4,@value5)", conn))
+                            {
+                                txtPassword.Text = txtPassword.Text.GetHashCode().ToString();
+                                Console.Write("ID: "); cmd.Parameters.AddWithValue("value1", txtUsername.Text);
+                                Console.Write("Name: "); cmd.Parameters.AddWithValue("value2", txtEmail.Text);
+                                Console.Write("Stock: "); cmd.Parameters.AddWithValue("value3", txtFName.Text);
+                                Console.Write("Price: "); cmd.Parameters.AddWithValue("value4", txtSName.Text);
+                                Console.Write("Price: "); cmd.Parameters.AddWithValue("value5", txtPassword.Text);
 
+                                cmd.ExecuteNonQuery();
+                                conn.Close();
+                            }
+                        }
                         this.Hide();
                         using (Login login = new())
                         {
