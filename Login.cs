@@ -88,7 +88,7 @@ namespace Mini_Proj
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-
+            UserValidation();
         }
 
         private void btnForgot_Click(object sender, EventArgs e)
