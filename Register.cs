@@ -20,23 +20,25 @@ namespace Mini_Proj
 
         private void btnPasswordView_MouseDown(object sender, MouseEventArgs e)
         {
-            txtPassword.PasswordChar = default;
+            txtPassword.UseSystemPasswordChar = false;
         }
 
         private void btnPasswordView_MouseUp(object sender, MouseEventArgs e)
         {
-            txtPassword.PasswordChar = '*';
+            txtPassword.UseSystemPasswordChar = true;
         }
 
         private void btnConfirmPasswordView_MouseDown(object sender, MouseEventArgs e)
         {
-            txtConfirmPassword.PasswordChar = default;
+            txtConfirmPassword.UseSystemPasswordChar = false;
         }
 
         private void btnConfirmPasswordView_MouseUp(object sender, MouseEventArgs e)
         {
-            txtConfirmPassword.PasswordChar = '*';
+            txtConfirmPassword.UseSystemPasswordChar = true;
         }
+
+        Random RNG = new Random();
 
         public class UserReg
         {
@@ -51,6 +53,7 @@ namespace Mini_Proj
         {
             if (txtPassword.Text == txtConfirmPassword.Text)
             {
+                err.Visible = false;
                 UserReg reg = new UserReg();
                 reg.Username = txtUsername.Text;
                 reg.Email = txtEmail.Text;
@@ -65,29 +68,59 @@ namespace Mini_Proj
                     {
                         count++;
                     }
-                    
+
                 }
+
+                int UsernameCount = 0;
+
+                using (var conn = new NpgsqlConnection(cs))
+                {
+                    conn.Open();
+
+                    using (var cmd = new NpgsqlCommand("SELECT COUNT(*) as username_count FROM Users WHERE Username = @value1", conn))
+                    {
+                        cmd.Parameters.AddWithValue("value1", txtUsername.Text);
+                        UsernameCount = Convert.ToInt32(cmd.ExecuteScalar());
+                    }
+
+                    conn.Close();
+                }
+
+                if (UsernameCount != 0)
+                {
+                    errDupUsername.Visible = true;
+                }
+                else { errDupUsername.Visible = false; }
+
+
+
 
                 if (txtUsername.Text == "" || txtEmail.Text == "" || txtFName.Text == "" || txtSName.Text == "" || txtPassword.Text == "")
                 {
                     err2.Visible = true;
                 }
+                if (txtEmail.Text.Contains("@") == false)
+                {
+                    errInvalidEmail.Visible = true;
+                }
                 else
                 {
-                    if (count > 0)
+                    errInvalidEmail.Visible = false;
+                    err2.Visible = false;
+                    if (count > 0 && txtPassword.Text.Length >= 8 && txtPassword.Text != "")
                     {
                         using (var conn = new NpgsqlConnection(cs))
                         {
                             conn.Open();
-                            using (var cmd = new NpgsqlCommand("INSERT INTO Users(id,Username,Email,Fname,Sname,Password) VALUES(id,@value1,@value2,@value3,@value4,@value5)", conn))
+                            using (var cmd = new NpgsqlCommand("INSERT INTO Users(Username,Email,Fname,Sname,Password,key) VALUES(@value1,@value2,@value3,@value4,@value5,@Value6)", conn))
                             {
                                 txtPassword.Text = txtPassword.Text.GetHashCode().ToString();
-                                Console.Write("ID: "); cmd.Parameters.AddWithValue("value1", txtUsername.Text);
-                                Console.Write("Name: "); cmd.Parameters.AddWithValue("value2", txtEmail.Text);
-                                Console.Write("Stock: "); cmd.Parameters.AddWithValue("value3", txtFName.Text);
-                                Console.Write("Price: "); cmd.Parameters.AddWithValue("value4", txtSName.Text);
-                                Console.Write("Price: "); cmd.Parameters.AddWithValue("value5", txtPassword.Text);
-
+                                cmd.Parameters.AddWithValue("value1", txtUsername.Text);
+                                cmd.Parameters.AddWithValue("value2", txtEmail.Text);
+                                cmd.Parameters.AddWithValue("value3", txtFName.Text);
+                                cmd.Parameters.AddWithValue("value4", txtSName.Text);
+                                cmd.Parameters.AddWithValue("value5", txtPassword.Text);
+                                cmd.Parameters.AddWithValue("value6", RNG.Next(100000,1000000));
                                 cmd.ExecuteNonQuery();
                                 conn.Close();
                             }
@@ -112,13 +145,14 @@ namespace Mini_Proj
             }
         }
 
-        
-
-        private void CreateValidation()
+        private void btnReturn_Click(object sender, EventArgs e)
         {
-            bool valid = false;
-
-
+            this.Hide();
+            using (Login login = new())
+            {
+                login.ShowDialog();
+            }
+            this.Close();
         }
     }
 }

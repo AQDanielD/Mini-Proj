@@ -16,12 +16,6 @@ namespace Mini_Proj
             Login User = new Login();
             (bool firstValue, bool secondValue) pair = (false, false);
 
-            Console.ForegroundColor = ConsoleColor.Red;
-            Console.WriteLine("--------------------------");
-            Console.WriteLine("ADMIN LOGIN");
-
-
-            //-----------------------
             if (UserUsernameFetch(cs, User.txtUsernameEmail.Text))
             {
                 pair.firstValue = true;
@@ -30,12 +24,7 @@ namespace Mini_Proj
             {
                 User.errLogin.Visible = true;
             }
-            //-----------------------
-
-            Console.BackgroundColor = ConsoleColor.Black;
-            Console.ForegroundColor = ConsoleColor.Red;
-
-            if (UserPasswordFetch(cs, User.txtPassword.Text))
+            if (UserPasswordFetch(cs, User.txtPassword.Text.GetHashCode().ToString()))
             {
                 pair.secondValue = true;
             }
@@ -48,10 +37,7 @@ namespace Mini_Proj
             {
                 //Show menu mainscreen for user and hide this one
             }
-            else
-            {
-                //Unreachable
-            }
+
         }
 
         public static bool UserUsernameFetch(string cs, string username)
@@ -102,7 +88,17 @@ namespace Mini_Proj
 
         private void btnLogin_Click(object sender, EventArgs e)
         {
-            UserValidation();
+
+        }
+
+        private void btnForgot_Click(object sender, EventArgs e)
+        {
+            this.Hide();
+            using (Forgot forgot = new())
+            {
+                forgot.ShowDialog();
+            }
+            this.Close();
         }
     }
 }

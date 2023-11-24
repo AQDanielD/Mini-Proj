@@ -45,6 +45,9 @@
             errPasswordMatch = new ErrorProvider(components);
             err = new Label();
             err2 = new Label();
+            errInvalidEmail = new Label();
+            errDupUsername = new Label();
+            btnReturn = new Button();
             ((System.ComponentModel.ISupportInitialize)errUsername).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errEmail).BeginInit();
             ((System.ComponentModel.ISupportInitialize)errPassword).BeginInit();
@@ -105,7 +108,6 @@
             txtPassword.Location = new Point(269, 256);
             txtPassword.MaxLength = 36;
             txtPassword.Name = "txtPassword";
-            txtPassword.PasswordChar = '*';
             txtPassword.PlaceholderText = "Password";
             txtPassword.ShortcutsEnabled = false;
             txtPassword.Size = new Size(236, 23);
@@ -118,7 +120,6 @@
             txtConfirmPassword.Location = new Point(269, 285);
             txtConfirmPassword.MaxLength = 36;
             txtConfirmPassword.Name = "txtConfirmPassword";
-            txtConfirmPassword.PasswordChar = '*';
             txtConfirmPassword.PlaceholderText = "Confirm Password";
             txtConfirmPassword.Size = new Size(236, 23);
             txtConfirmPassword.TabIndex = 6;
@@ -201,12 +202,52 @@
             err2.Text = "Missing Fields!";
             err2.Visible = false;
             // 
+            // errInvalidEmail
+            // 
+            errInvalidEmail.AutoSize = true;
+            errInvalidEmail.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            errInvalidEmail.ForeColor = Color.Red;
+            errInvalidEmail.Location = new Point(510, 175);
+            errInvalidEmail.Name = "errInvalidEmail";
+            errInvalidEmail.Size = new Size(124, 17);
+            errInvalidEmail.TabIndex = 12;
+            errInvalidEmail.Text = "Email must be valid!";
+            errInvalidEmail.Visible = false;
+            // 
+            // errDupUsername
+            // 
+            errDupUsername.AutoSize = true;
+            errDupUsername.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            errDupUsername.ForeColor = Color.Red;
+            errDupUsername.Location = new Point(510, 141);
+            errDupUsername.Name = "errDupUsername";
+            errDupUsername.Size = new Size(157, 17);
+            errDupUsername.TabIndex = 13;
+            errDupUsername.Text = "Username Has been Taken";
+            errDupUsername.Visible = false;
+            // 
+            // btnReturn
+            // 
+            btnReturn.FlatAppearance.BorderColor = SystemColors.GradientActiveCaption;
+            btnReturn.FlatStyle = FlatStyle.Flat;
+            btnReturn.Font = new Font("MV Boli", 26.25F, FontStyle.Regular, GraphicsUnit.Point);
+            btnReturn.Location = new Point(-6, -1);
+            btnReturn.Name = "btnReturn";
+            btnReturn.Size = new Size(200, 58);
+            btnReturn.TabIndex = 14;
+            btnReturn.Text = "<- Return";
+            btnReturn.UseVisualStyleBackColor = true;
+            btnReturn.Click += btnReturn_Click;
+            // 
             // Register
             // 
             AutoScaleDimensions = new SizeF(7F, 15F);
             AutoScaleMode = AutoScaleMode.Font;
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(800, 450);
+            Controls.Add(btnReturn);
+            Controls.Add(errDupUsername);
+            Controls.Add(errInvalidEmail);
             Controls.Add(err2);
             Controls.Add(err);
             Controls.Add(btnCreate);
@@ -247,5 +288,8 @@
         private ErrorProvider errPasswordMatch;
         private Label err;
         private Label err2;
+        private Label errInvalidEmail;
+        private Label errDupUsername;
+        private Button btnReturn;
     }
 }

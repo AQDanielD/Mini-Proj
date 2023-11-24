@@ -33,7 +33,7 @@
             txtPassword = new TextBox();
             btnLogin = new Button();
             btnRegister = new Button();
-            button1 = new Button();
+            btnForgot = new Button();
             errLogin = new Label();
             SuspendLayout();
             // 
@@ -102,18 +102,19 @@
             btnRegister.UseVisualStyleBackColor = false;
             btnRegister.Click += btnRegister_Click;
             // 
-            // button1
+            // btnForgot
             // 
-            button1.BackColor = SystemColors.InactiveCaption;
-            button1.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
-            button1.FlatStyle = FlatStyle.Flat;
-            button1.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
-            button1.Location = new Point(355, 247);
-            button1.Name = "button1";
-            button1.Size = new Size(77, 30);
-            button1.TabIndex = 7;
-            button1.Text = "Forgot";
-            button1.UseVisualStyleBackColor = false;
+            btnForgot.BackColor = SystemColors.InactiveCaption;
+            btnForgot.FlatAppearance.BorderColor = SystemColors.ControlDarkDark;
+            btnForgot.FlatStyle = FlatStyle.Flat;
+            btnForgot.Font = new Font("MV Boli", 9F, FontStyle.Regular, GraphicsUnit.Point);
+            btnForgot.Location = new Point(355, 247);
+            btnForgot.Name = "btnForgot";
+            btnForgot.Size = new Size(77, 30);
+            btnForgot.TabIndex = 7;
+            btnForgot.Text = "Forgot";
+            btnForgot.UseVisualStyleBackColor = false;
+            btnForgot.Click += btnForgot_Click;
             // 
             // errLogin
             // 
@@ -134,7 +135,7 @@
             BackColor = SystemColors.GradientActiveCaption;
             ClientSize = new Size(800, 450);
             Controls.Add(errLogin);
-            Controls.Add(button1);
+            Controls.Add(btnForgot);
             Controls.Add(btnRegister);
             Controls.Add(btnLogin);
             Controls.Add(txtPassword);
@@ -153,7 +154,7 @@
         private TextBox txtPassword;
         private Button btnLogin;
         private Button btnRegister;
-        private Button button1;
+        private Button btnForgot;
         private Label errLogin;
     }
 }
